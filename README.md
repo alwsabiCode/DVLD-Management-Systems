@@ -43,3 +43,41 @@ management, and desktop integration.
 
 ## 📁 Project Structure
 
+---
+
+## 📸 Screenshots
+
+(Add your images here)
+
+![Home](screenshots/main.png)
+
+---
+
+## 🧪 How to Run
+
+### 🔹 Prerequisites
+- .NET SDK 6 or later
+- SQL Server (Express/Developer)
+- Visual Studio 2022+
+
+### 🔹 Steps
+1. Restore the database using scripts in `/Database/`
+2. Update the connection string in `appsettings.json`
+3. Build & Run the API project
+4. Open the WinForms client and connect to the API
+
+---
+
+## 🚀 Project Status
+
+🟢 **Complete & Functional** — Stable version ready to demonstrate skills
+
+---
+
+## 👤 Author
+
+**Ali Al‑Wsabi**  
+Junior .NET Developer  
+GitHub: https://github.com/alwsabiCode
+
+
