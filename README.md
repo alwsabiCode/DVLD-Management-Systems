@@ -39,5 +39,4 @@ C#.NET, SQL Server (T-SQL), and Windows Forms.
 ## ▶ How to Run
 1. Restore database scripts
 2. Update connection string
-3. Run the Web API
-4. Run WinForms application
+3. Run WinForms application
