@@ -50,6 +50,7 @@ namespace Business_DVLD
                 ApplicationStatus = value;
             }
         }
+
          
         public string StatusText
         {
