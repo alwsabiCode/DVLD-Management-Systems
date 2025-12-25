@@ -57,12 +57,12 @@ namespace Business_DVLD
         }
         private bool _AddNewDriver()
         {
-            this.DriverID = clsDriverData.AddNewDriver(DriverDTO);
+            this.DriverID = clsDriverData.AddNewDriver(_DDTO);
             return (this.DriverID != -1);
         }
         private bool _UpdateDriver()
         {
-            return clsDriverData.UpdateDriver(DriverDTO);
+            return clsDriverData.UpdateDriver(_DDTO);
         }
         public bool Save()
         {

@@ -43,7 +43,7 @@ namespace DVLD_System.Applications.Rlease_Detained_License
                 d.ReleaseDate,
                 d.NationalNo,
                 d.FullName,
-                 d.ReleaseApplicationID
+                d.ReleaseApplicationID
             }).ToList();
             lblRecordCount.Text = dgvDetainedLicenses.Rows.Count.ToString();
 
@@ -74,7 +74,7 @@ namespace DVLD_System.Applications.Rlease_Detained_License
                 dgvDetainedLicenses.Columns[7].Width = 330;
 
                 dgvDetainedLicenses.Columns[8].HeaderText = "Rlease App.ID";
-                dgvDetainedLicenses.Columns[8].Width = 150;
+                dgvDetainedLicenses.Columns[8].Width = 100;
 
             }
         }

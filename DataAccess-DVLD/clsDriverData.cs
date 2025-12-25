@@ -78,7 +78,7 @@ namespace DataAccess_DVLD
             }
         }
 
-        public static int AddNewDriver(clsDriverDTO DDTO)
+        public static int  AddNewDriver(clsDriverDTO DDTO)
         {
             using (SqlConnection connection=new SqlConnection(clsConnectionSetting.ConnectionString))
             {
@@ -87,13 +87,12 @@ namespace DataAccess_DVLD
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@PersonID", DDTO.PersonID);
                     command.Parameters.AddWithValue("@CreatedByUserID", DDTO.CreatedByUserID);
-                    command.Parameters.AddWithValue("@CreateDate", DDTO.CreateDate);
-                    connection.Open();
+                    command.Parameters.AddWithValue("@CreateDate", DateTime.Now);
                    var output=new SqlParameter("@DriverID",SqlDbType.Int)
                    {
                        Direction=ParameterDirection.Output
                    };
-                      command.Parameters.Add(output);
+                    command.Parameters.Add(output);
                     connection.Open();
                     command.ExecuteNonQuery();
                     return Convert.ToInt32( output.Value);

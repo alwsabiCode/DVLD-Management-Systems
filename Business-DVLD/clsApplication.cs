@@ -22,7 +22,7 @@ namespace Business_DVLD
             ReplaceDamagedDrivingLicense = 4,
             ReleaseDetainedDrivingLicsense = 5,
             NewInternationalLicense = 6,
-            RetakeTest = 7
+            RetakeTest = 8
         };
         public enum enApplicationStatus
         {

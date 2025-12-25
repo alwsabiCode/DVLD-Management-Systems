@@ -228,8 +228,8 @@ namespace Business_DVLD
                 //we check if the driver already there for this person.
                 Driver = new clsDriver(new clsDriverDTO(),clsDriver.enMode.AddNew);
 
-                Driver.DriverDTO.DriverID = this.ApplicatDTO.ApplicationPersonID;
-                Driver.DriverDTO.DriverID = CreatedByUserID;
+                Driver.DriverDTO.PersonID = this.ApplicatDTO.ApplicationPersonID;
+                Driver.DriverDTO.CreatedByUserID = CreatedByUserID;
                 if (Driver.Save())
                 {
                     DriverID = Driver.DriverID;

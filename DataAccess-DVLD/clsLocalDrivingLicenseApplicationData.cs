@@ -190,9 +190,10 @@ namespace DataAccess_DVLD
                     command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
                     connetion.Open();
                     object result = command.ExecuteScalar();
-                    if (result != null && bool.TryParse(result.ToString(), out bool value))
+
+                    if (result != null)
                     {
-                        returnedResult = value;
+                       returnedResult= true;
                     }
                 }
             }
