@@ -87,6 +87,7 @@
             this.btnClose.TabIndex = 29;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnDetainLicense
             // 
@@ -244,7 +245,7 @@
             this.toolStripMenuItem1,
             this.releaseDetainedLicenseToolStripMenuItem});
             this.cmsApplications.Name = "contextMenuStrip1";
-            this.cmsApplications.Size = new System.Drawing.Size(242, 184);
+            this.cmsApplications.Size = new System.Drawing.Size(242, 162);
             // 
             // PesonDetailsToolStripMenuItem
             // 

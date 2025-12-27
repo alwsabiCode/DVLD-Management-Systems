@@ -20,7 +20,6 @@ namespace DVLD_System.Applications.Rlease_Detained_License
     public partial class frmListDetainedLicenses : Form
     {
         private static List<clsDetainedLicenseViewDTO> _DetainedLicenses = clsDetainedLicense.GetAllDetainedLicenses();
-        private List<clsDetainedLicenseViewDTO> _filter = new List<clsDetainedLicenseViewDTO>(_DetainedLicenses);
         public frmListDetainedLicenses()
         {
             InitializeComponent();
@@ -31,9 +30,7 @@ namespace DVLD_System.Applications.Rlease_Detained_License
             cbFilterBy.SelectedIndex = 0;
 
             _DetainedLicenses = clsDetainedLicense.GetAllDetainedLicenses();
-            _filter= new List<clsDetainedLicenseViewDTO>(_DetainedLicenses);
-
-            dgvDetainedLicenses.DataSource = _filter.Select(d => new
+            dgvDetainedLicenses.DataSource = _DetainedLicenses.Select(d => new
             {
                 d.DetainID,
                 d.LicenseID,
@@ -280,6 +277,11 @@ namespace DVLD_System.Applications.Rlease_Detained_License
             frm.ShowDialog();
             //refresh
             frmListDetainedLicenses_Load(null, null);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

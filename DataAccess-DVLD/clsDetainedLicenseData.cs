@@ -31,12 +31,12 @@ namespace DataAccess_DVLD
                                 reader.GetDecimal(reader.GetOrdinal("FineFees")),
                                 reader.GetInt32(reader.GetOrdinal("CreatedByUserID")),
                                 reader.GetBoolean(reader.GetOrdinal("IsReleased")),
-                                reader.IsDBNull(reader.GetOrdinal("ReleaseDate")) ?
-                                DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
-                                reader.IsDBNull(reader.GetOrdinal("ReleasedByUserID")) ?
-                                -1 : reader.GetInt32(reader.GetOrdinal("ReleasedByUserID")),
-                                reader.IsDBNull(reader.GetOrdinal("ReleaseApplicationID")) ?
-                                -1 : reader.GetInt32(reader.GetOrdinal("ReleaseApplicationID"))
+                                reader.IsDBNull(reader.GetOrdinal("ReleaseDate")) ? DateTime.MaxValue :
+                                reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
+                                reader.IsDBNull(reader.GetOrdinal("ReleasedByUserID")) ? -1:
+                                reader.GetInt32(reader.GetOrdinal("ReleasedByUserID")),
+                                reader.IsDBNull(reader.GetOrdinal("ReleaseApplicationID")) ? -1 :
+                                reader.GetInt32(reader.GetOrdinal("ReleaseApplicationID"))
 
                                 );
 
@@ -66,18 +66,18 @@ namespace DataAccess_DVLD
                         if (reader.Read())
                         {
                             return new clsDetainedLicenseDTO(
-                                reader.GetInt32(reader.GetOrdinal("DetainID")),
+                                  reader.GetInt32(reader.GetOrdinal("DetainID")),
                                 reader.GetInt32(reader.GetOrdinal("LicenseID")),
                                 reader.GetDateTime(reader.GetOrdinal("DetainDate")),
                                 reader.GetDecimal(reader.GetOrdinal("FineFees")),
                                 reader.GetInt32(reader.GetOrdinal("CreatedByUserID")),
                                 reader.GetBoolean(reader.GetOrdinal("IsReleased")),
-                                reader.IsDBNull(reader.GetOrdinal("ReleaseDate")) ?
-                                DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
-                                reader.IsDBNull(reader.GetOrdinal("ReleasedByUserID")) ?
-                                -1 : reader.GetInt32(reader.GetOrdinal("ReleasedByUserID")),
-                                reader.IsDBNull(reader.GetOrdinal("ReleaseApplicationID")) ?
-                                -1 : reader.GetInt32(reader.GetOrdinal("ReleaseApplicationID"))
+                                reader.IsDBNull(reader.GetOrdinal("ReleaseDate")) ? DateTime.MaxValue :
+                                reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
+                                reader.IsDBNull(reader.GetOrdinal("ReleasedByUserID")) ? -1 :
+                                reader.GetInt32(reader.GetOrdinal("ReleasedByUserID")),
+                                reader.IsDBNull(reader.GetOrdinal("ReleaseApplicationID")) ? -1 :
+                                reader.GetInt32(reader.GetOrdinal("ReleaseApplicationID"))
                                 );
                         }
                         else
@@ -111,7 +111,7 @@ namespace DataAccess_DVLD
                                 reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
                                 reader.GetString(reader.GetOrdinal("NationalNo")),
                                 reader.GetString(reader.GetOrdinal("FullName")),
-                                reader.IsDBNull(reader.GetOrdinal("ReleaseApplicationID")) ?-1 :
+                                reader.IsDBNull(reader.GetOrdinal("ReleaseApplicationID")) ? -1 :
                                 reader.GetInt32(reader.GetOrdinal("ReleaseApplicationID"))
                                 ));
                         }
@@ -131,6 +131,7 @@ namespace DataAccess_DVLD
                     command.Parameters.AddWithValue("@DetainDate", detainedLicenseDTO.DetainDate);
                     command.Parameters.AddWithValue("@FineFees", detainedLicenseDTO.FineFees);
                     command.Parameters.AddWithValue("@CreatedByUserID", detainedLicenseDTO.CreatedByUserID);
+                    command.Parameters.AddWithValue("@IsReleased", detainedLicenseDTO.IsReleased);
 
                     var DetainID = new SqlParameter("@DetainID", SqlDbType.Int)
                     {

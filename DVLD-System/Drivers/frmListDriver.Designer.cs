@@ -165,6 +165,7 @@
             this.dgvDrivers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDrivers.Size = new System.Drawing.Size(965, 219);
             this.dgvDrivers.TabIndex = 11;
+            this.dgvDrivers.DoubleClick += new System.EventHandler(this.dgvDrivers_DoubleClick);
             // 
             // cmsDrivers
             // 
@@ -175,7 +176,7 @@
             this.toolStripSeparator1,
             this.showPersonLicenseHistoryToolStripMenuItem});
             this.cmsDrivers.Name = "contextMenuStrip1";
-            this.cmsDrivers.Size = new System.Drawing.Size(256, 152);
+            this.cmsDrivers.Size = new System.Drawing.Size(256, 130);
             // 
             // showDetailsToolStripMenuItem
             // 

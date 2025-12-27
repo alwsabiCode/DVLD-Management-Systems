@@ -15,7 +15,7 @@ namespace DVLD_System.Drivers
 {
     public partial class frmListDriver : Form
     {
-        private  List<clsDriverViewDTO>_ListDrivers=clsDriver.GetAllDrivers();
+        private List<clsDriverViewDTO> _ListDrivers = clsDriver.GetAllDrivers();
         public frmListDriver()
         {
             InitializeComponent();
@@ -28,11 +28,11 @@ namespace DVLD_System.Drivers
 
         private void frmListDriver_Load(object sender, EventArgs e)
         {
-            _ListDrivers=clsDriver.GetAllDrivers();
+            _ListDrivers = clsDriver.GetAllDrivers();
             dgvDrivers.DataSource = _ListDrivers;
             lblRecordsCount.Text = dgvDrivers.Rows.Count.ToString();
-            cbFilter.SelectedIndex=0;
-            if(dgvDrivers.Rows.Count>0)
+            cbFilter.SelectedIndex = 0;
+            if (dgvDrivers.Rows.Count > 0)
             {
                 dgvDrivers.Columns[0].HeaderText = "Driver ID";
                 dgvDrivers.Columns[0].Width = 100;
@@ -106,15 +106,15 @@ namespace DVLD_System.Drivers
                 return;
             }
             var ListFilteredDrivers = new List<clsDriverViewDTO>();
-            if (FilterColumn== "DriverID")
+            if (FilterColumn == "DriverID")
             {
-                if (int.TryParse(txtFilterValue.Text.Trim(),out int value))
+                if (int.TryParse(txtFilterValue.Text.Trim(), out int value))
                 {
-                    ListFilteredDrivers = _ListDrivers.Where(P=> P.DriverID == value).ToList();
+                    ListFilteredDrivers = _ListDrivers.Where(P => P.DriverID == value).ToList();
                 }
                 else
                 {
-                      ListFilteredDrivers = _ListDrivers;
+                    ListFilteredDrivers = _ListDrivers;
                 }
 
             }
@@ -140,7 +140,7 @@ namespace DVLD_System.Drivers
                 ListFilteredDrivers = _ListDrivers.Where(P => P.FullName.ToLower().Contains(filterValue)).ToList();
             }
 
-            var CustomList = ListFilteredDrivers.Select(P=> new
+            var CustomList = ListFilteredDrivers.Select(P => new
             {
                 P.DriverID,
                 P.PersonID,
@@ -164,7 +164,7 @@ namespace DVLD_System.Drivers
         {
 
             int PersonID = (int)dgvDrivers.CurrentRow.Cells[1].Value;
-           frmPersonDetails frm = new frmPersonDetails(PersonID);
+            frmPersonDetails frm = new frmPersonDetails(PersonID);
             frm.ShowDialog();
             //refresh
             frmListDriver_Load(null, null);
@@ -183,6 +183,15 @@ namespace DVLD_System.Drivers
 
             frmShowPersonLicenseHistory frm = new frmShowPersonLicenseHistory(PersonID);
             frm.ShowDialog();
+        }
+
+        private void dgvDrivers_DoubleClick(object sender, EventArgs e)
+        {
+            int PersonID = (int)dgvDrivers.CurrentRow.Cells[1].Value;
+            frmPersonDetails frm = new frmPersonDetails(PersonID);
+            frm.ShowDialog();
+            //refresh
+            frmListDriver_Load(null, null);
         }
     }
 }
