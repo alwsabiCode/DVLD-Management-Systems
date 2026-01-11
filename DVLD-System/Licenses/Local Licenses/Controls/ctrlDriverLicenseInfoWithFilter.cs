@@ -13,14 +13,32 @@ namespace DVLD_System.Licenses.Local_Licenses.Controls
 {
     public partial class ctrlDriverLicenseInfoWithFilter : UserControl
     {
-        public event Action<int> OnLicenseSelected;
-        protected virtual void PersonSelected(int LicenseID)
+        //public event Action<int> OnLicenseSelected;
+        //protected virtual void PersonSelected(int LicenseID)
+        //{
+        //    Action<int>handler=OnLicenseSelected;
+        //    if(handler != null)
+        //    {
+        //        handler(LicenseID);
+        //    }
+        //}
+        public class LicenseSelected:EventArgs
         {
-            Action<int>handler=OnLicenseSelected;
-            if(handler != null)
+           public int LicenseID;
+            public LicenseSelected(int licenseID)
             {
-                handler(LicenseID);
+                this.LicenseID = licenseID;
             }
+        }
+        public event EventHandler<LicenseSelected> OnLicenseSelected;
+        public void RaiseOnLicenseSelected(int LicenseID)
+        {
+            RaiseOnLicenseSelected(new LicenseSelected(LicenseID));
+
+        }
+        protected virtual void RaiseOnLicenseSelected(LicenseSelected e)
+        {
+            OnLicenseSelected?.Invoke(this, e);
         }
         public ctrlDriverLicenseInfoWithFilter()
         {
@@ -59,7 +77,7 @@ namespace DVLD_System.Licenses.Local_Licenses.Controls
             _LicenseID = ctrlDriverLicenseInfo1.LicenseID;
             if (OnLicenseSelected != null && FilterEnabled)
                 // Raise the event with a parameter
-                OnLicenseSelected(_LicenseID);
+                RaiseOnLicenseSelected(_LicenseID);
 
 
         }

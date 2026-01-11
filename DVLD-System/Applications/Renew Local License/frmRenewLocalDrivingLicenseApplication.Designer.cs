@@ -147,7 +147,6 @@
             this.ctrlDriverLicenseInfoWithFilter1.Name = "ctrlDriverLicenseInfoWithFilter1";
             this.ctrlDriverLicenseInfoWithFilter1.Size = new System.Drawing.Size(873, 389);
             this.ctrlDriverLicenseInfoWithFilter1.TabIndex = 0;
-            this.ctrlDriverLicenseInfoWithFilter1.OnLicenseSelected += new System.Action<int>(this.ctrlDriverLicenseInfoWithFilter1_OnLicenseSelected);
             // 
             // tpNewLicense
             // 

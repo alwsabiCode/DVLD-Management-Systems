@@ -13,16 +13,34 @@ namespace DVLD_System.People.Controls
 {
     public partial class ctrlPersonCardWithFilter : UserControl
     {
-        public event Action<int> OnPersonSelected;
+        //public event Action<int> OnPersonSelected;
 
-        protected virtual void PersonSelected(int PersonID)
+        //protected virtual void PersonSelected(int PersonID)
+        //{
+        //    Action<int> handler = OnPersonSelected;
+        //    if (handler != null)
+        //    {
+        //        handler(PersonID);
+        //    }
+        //}
+        public class PersonSelected : EventArgs
         {
-            Action<int> handler = OnPersonSelected;
-            if (handler != null)
+            public int PersonID;
+            public PersonSelected(int personID)
             {
-                handler(PersonID);
+                this.PersonID = personID;
             }
         }
+        public event EventHandler<PersonSelected> OnPersonSelected;
+        public void RaiseOnPersonSelected(int PersonID)
+        {
+            RaiseOnPersonSelected(new PersonSelected(PersonID));
+        }
+        protected virtual void RaiseOnPersonSelected(PersonSelected e)
+        {
+            OnPersonSelected?.Invoke(this, e);
+        }
+
         private bool _ShowAddPerson = true;
         public bool ShowAddPerson
         {
@@ -82,7 +100,7 @@ namespace DVLD_System.People.Controls
             }
             if (OnPersonSelected != null && _ShowFilter)
             {
-                OnPersonSelected(ctrlPersonCards1.PersonID);
+                RaiseOnPersonSelected(PersonID);
             }
         }
         private void ctrlPersonCardWithFilter_Load(object sender, EventArgs e)

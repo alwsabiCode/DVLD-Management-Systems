@@ -120,7 +120,6 @@
             this.ctrlPersonCardWithFilter1.ShowFilter = true;
             this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(801, 435);
             this.ctrlPersonCardWithFilter1.TabIndex = 21;
-            this.ctrlPersonCardWithFilter1.OnPersonSelected += new System.Action<int>(this.ctrlPersonCardWithFilter1_OnPersonSelected);
             // 
             // tpApplication
             // 
