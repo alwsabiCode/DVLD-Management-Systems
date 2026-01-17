@@ -33,7 +33,7 @@ namespace DataAccess_DVLD
                                 reader.GetBoolean(reader.GetOrdinal("IsReleased")),
                                 reader.IsDBNull(reader.GetOrdinal("ReleaseDate")) ? DateTime.MaxValue :
                                 reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
-                                reader.IsDBNull(reader.GetOrdinal("ReleasedByUserID")) ? -1:
+                                reader.IsDBNull(reader.GetOrdinal("ReleasedByUserID"))? -1:
                                 reader.GetInt32(reader.GetOrdinal("ReleasedByUserID")),
                                 reader.IsDBNull(reader.GetOrdinal("ReleaseApplicationID")) ? -1 :
                                 reader.GetInt32(reader.GetOrdinal("ReleaseApplicationID"))

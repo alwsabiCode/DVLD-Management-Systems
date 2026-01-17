@@ -1,36 +1,57 @@
 ﻿using Business_DVLD;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace DVLD_System.Global_Classes
 {
     public class clsGlobal
     {
         public static clsUser CurrentUser;
-
-        public static object Dictionory { get; private set; }
-
+       
+        
+        public static void RegisterWinLog(string Message,EventLogEntryType typeLog)
+        {
+            string SourceName = "DVLD-Systems";
+            if (!EventLog.SourceExists(SourceName))
+            {
+                EventLog.CreateEventSource(SourceName, "Application");
+            }
+            EventLog.WriteEntry(SourceName, Message, typeLog);
+        }
         public static bool RememberUsernameAndPassword(string Username, string Password)
         {
             try
             {
-                string CurrentDirectory = Directory.GetCurrentDirectory();
-                string filePath = CurrentDirectory + "\\data.txt";
-                if (Username == "" && File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
-                string dataToSave = Username + "#//#" + Password;
-                using (StreamWriter writer = new StreamWriter(filePath))
-                {
-                    writer.WriteLine(dataToSave);
-                    return true;
-                }
+                //string CurrentDirectory = Directory.GetCurrentDirectory();
+                //string filePath = CurrentDirectory + "\\data.txt";
+                //if (Username == "" && File.Exists(filePath))
+                //{
+                //    File.Delete(filePath);
+                //}
+                //string dataToSave = Username + "#//#" + Password;
+                //using (StreamWriter writer = new StreamWriter(filePath))
+                //{
+                //    writer.WriteLine(dataToSave);
+                //    return true;
+                //}
+
+
+                string keyPath = @"HKEY_CURRENT_USER\SOFTWARE\DVLDSYSTEM";
+                string valueName = "Login";
+
+                string valueData = Username + "#//#" + Password;
+                Registry.SetValue(keyPath, valueName, valueData, RegistryValueKind.String);
+
+                return true;
+
             }
             catch (Exception ex)
             {
@@ -38,33 +59,53 @@ namespace DVLD_System.Global_Classes
                 return false;
             }
         }
-        public static bool GetStoredCredential(ref string Username, ref string Password)
+        public static bool GetStoredCredential( ref string Username, ref string Password)
         {
             try
             {
-                string CurrentDirectory = Directory.GetCurrentDirectory();
-                string filePath = CurrentDirectory + "\\data.txt";
-                if (File.Exists(filePath))
+                //string CurrentDirectory = Directory.GetCurrentDirectory();
+                //string filePath = CurrentDirectory + "\\data.txt";
+                //if (File.Exists(filePath))
+                //{
+
+
+                //    using (StreamReader reader = new StreamReader(filePath))
+                //    {
+                //        string data;
+                //        while ((data = reader.ReadLine()) != null)
+                //        {
+                //            Console.WriteLine(data); // Output each line of data to the console
+
+                //            string[] result = data.Split(new string[] { "#//#" }, StringSplitOptions.None);
+
+                //            Username = result[0];
+                //            Password = result[1];
+                //        }
+                //        return true;
+                //    }
+                //}
+                //else
+                //{
+                //    return false;
+                //}
+
+                Username = "";
+                Password = "";
+
+                string keyPath = @"HKEY_CURRENT_USER\SOFTWARE\DVLDSYSTEM";
+                string valueName = "Login";
+
+                string value = Registry.GetValue(keyPath, valueName, null) as string;
+                if (value != null)
                 {
-
-
-                    using (StreamReader reader = new StreamReader(filePath))
-                    {
-                        string data;
-                        while ((data = reader.ReadLine()) != null)
-                        {
-                            Console.WriteLine(data); // Output each line of data to the console
-
-                            string[] result = data.Split(new string[] { "#//#" }, StringSplitOptions.None);
-
-                            Username = result[0];
-                            Password = result[1];
-                        }
-                        return true;
-                    }
+                    string[] parts = value.Split(new string[] { "#//#" }, StringSplitOptions.None);
+                    Username = parts[0];
+                    Password = parts[1];
+                    return true;
                 }
                 else
                 {
+                    MessageBox.Show($"Value {valueName} not found in the Registry.");
                     return false;
                 }
             }

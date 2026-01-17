@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -40,6 +41,7 @@ namespace DVLD_System.Login
                 {
                     txtUserName.Focus();
                     MessageBox.Show("This user is inactive. Please contact the administrator.", "Inactive User", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    clsGlobal.RegisterWinLog("This user is inactive",EventLogEntryType.Warning);
                     return;
                 }
                 clsGlobal.CurrentUser = user;
@@ -51,6 +53,7 @@ namespace DVLD_System.Login
             {
                 txtUserName.Focus();
                 MessageBox.Show("Invalid username or password. Please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
         private void frmLogin_Load(object sender, EventArgs e)
