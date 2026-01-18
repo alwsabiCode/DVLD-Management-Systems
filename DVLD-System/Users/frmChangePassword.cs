@@ -1,4 +1,5 @@
 ﻿using Business_DVLD;
+using DVLD_System.Global_Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,7 +91,7 @@ namespace DVLD_System.Users
 
         private void txtConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (txtConfirmPassword.Text.Trim() != txtNewPassword.Text.Trim())
+            if ( txtConfirmPassword.Text.Trim() != txtNewPassword.Text.Trim())
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtConfirmPassword, "Password Confirmation does not match New Password!");
@@ -111,7 +112,7 @@ namespace DVLD_System.Users
                     "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            _User.UserDTO.Password = txtNewPassword.Text.Trim();
+            _User.UserDTO.Password = clsGlobal.ComputeHash( txtNewPassword.Text.Trim());
 
 
             if (_User.Save())

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModuleDTO_DVLD;
+using DVLD_System.Global_Classes;
 
 namespace DVLD_System.Users
 {
@@ -91,7 +92,7 @@ namespace DVLD_System.Users
             }
             _User.UserDTO.PersonID = ctrlPersonCardWithFilter1.PersonID;
             _User.UserDTO.Username = txtUserName.Text;
-            _User.UserDTO.Password = txtPassword.Text;
+            _User.UserDTO.Password = clsGlobal.ComputeHash(txtPassword.Text);
             _User.UserDTO.IsActive = chkIsActive.Checked;
 
            

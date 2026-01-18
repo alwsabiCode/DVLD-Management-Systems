@@ -26,7 +26,7 @@ namespace DVLD_System.Login
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            clsUser user = clsUser.FindByUsernameAndPassword(txtUserName.Text.Trim(), txtPassword.Text.Trim());
+            clsUser user = clsUser.FindByUsernameAndPassword(txtUserName.Text.Trim(),clsGlobal.ComputeHash(txtPassword.Text.Trim()));
             if (user != null)
             {
                 if(chkRememberMe.Checked)

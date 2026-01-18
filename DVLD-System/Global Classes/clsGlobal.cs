@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,7 +17,14 @@ namespace DVLD_System.Global_Classes
     {
         public static clsUser CurrentUser;
        
-        
+        public static string ComputeHash(string Input)
+        {
+            using (SHA256 hash = SHA256.Create())
+            {
+                byte[] hashbyte = hash.ComputeHash(Encoding.UTF8.GetBytes(Input));
+                return BitConverter.ToString(hashbyte).Replace("-", "").ToLower();
+            }
+        }
         public static void RegisterWinLog(string Message,EventLogEntryType typeLog)
         {
             string SourceName = "DVLD-Systems";
@@ -47,7 +55,7 @@ namespace DVLD_System.Global_Classes
                 string keyPath = @"HKEY_CURRENT_USER\SOFTWARE\DVLDSYSTEM";
                 string valueName = "Login";
 
-                string valueData = Username + "#//#" + Password;
+                string valueData = Username + "#//#" + ComputeHash(Password);
                 Registry.SetValue(keyPath, valueName, valueData, RegistryValueKind.String);
 
                 return true;
@@ -100,7 +108,7 @@ namespace DVLD_System.Global_Classes
                 {
                     string[] parts = value.Split(new string[] { "#//#" }, StringSplitOptions.None);
                     Username = parts[0];
-                    Password = parts[1];
+                    Password = ComputeHash(parts[1]);
                     return true;
                 }
                 else
